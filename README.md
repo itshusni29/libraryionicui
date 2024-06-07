@@ -1,4 +1,4 @@
-Berikut adalah README dalam bahasa Indonesia untuk proyek LibraryIonicUI:
+Berikut adalah README yang diperbarui dengan penjelasan tambahan tentang integrasi Ionic dengan API Laravel dan cara menjalankannya secara lokal:
 
 # LibraryIonicUI
 
@@ -13,6 +13,7 @@ Selamat datang di proyek LibraryIonicUI! README ini akan memandu Anda melalui pr
   - [Menjalankan Proyek](#menjalankan-proyek)
 - [Penggunaan](#penggunaan)
 - [Berkontribusi](#berkontribusi)
+- [Integrasi Ionic dan API Laravel](#integrasi-ionic-dan-api-laravel)
 - [Lisensi](#lisensi)
 
 ## Prasyarat
@@ -79,6 +80,15 @@ Jika Anda ingin berkontribusi pada proyek ini, silakan ikuti langkah-langkah ber
    git push origin fitur/NamaFiturAnda
    ```
 6. Buat pull request.
+
+## Integrasi Ionic dan API Laravel
+
+Anda dapat mengintegrasikan proyek Ionic ini dengan API Laravel yang telah disediakan. Untuk melakukan integrasi, ikuti langkah-langkah berikut:
+
+1. Kloning repositori API Laravel dari [sini](https://github.com/itshusni29/Apiforionic.git) ke direktori lokal Anda.
+2. Ikuti instruksi instalasi dan konfigurasi yang disediakan dalam README API Laravel untuk menyiapkan API di mesin lokal Anda.
+3. Setelah API Laravel berjalan, pastikan bahwa URL API telah disetel dengan benar dalam proyek Ionic. Anda dapat mengubahnya di berkas konfigurasi API dalam proyek Ionic.
+4. Jalankan kedua aplikasi, API Laravel dan proyek Ionic secara bersamaan untuk melakukan integrasi dan menguji koneksi antara kedua aplikasi.
 
 ## Lisensi
 

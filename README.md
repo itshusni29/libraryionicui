@@ -1,4 +1,4 @@
-Berikut adalah README yang diperbarui dengan penjelasan tambahan tentang integrasi Ionic dengan API Laravel dan cara menjalankannya secara lokal:
+
 
 # LibraryIonicUI
 

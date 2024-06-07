@@ -1,0 +1,87 @@
+
+
+.greeting {
+    text-align: left;
+    padding: 20px;
+    font-family: "Poppins", sans-serif;
+    h1 {
+      font-size: xx-large;
+      font-family: "Poppins", sans-serif;
+    }
+  
+    p {
+      font-size: large;
+      font-family: "Poppins", sans-serif;
+    }
+  }
+  
+
+  .notification-icon {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: xx-large;
+  }
+  
+  .scrolling-wrapper {
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+    font-family: "Poppins", sans-serif;
+    .card {
+      display: inline-block;
+      border-radius: 20px;
+      font-family: "Poppins", sans-serif;
+    }
+  }
+
+  .scrolling-wrapper {
+    -webkit-overflow-scrolling: touch;
+    font-family: "Poppins", sans-serif;
+  }
+
+  .scrolling-wrapper {
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  .new-arrival-title {
+    padding-left: 0.5em;
+  }
+
+  .arrival-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: -10px; /* Atur jarak antara judul dan konten */
+  }
+
+  .book-card {
+    border-radius: 20px;
+  }
+
+  .text {
+    font-family: "Poppins", sans-serif;
+  }
+
+  .text-book-title {
+    white-space: nowrap; /* Agar teks tidak melipat jika lebih panjang dari lebar kolom */
+    overflow: hidden; /* Menghilangkan teks yang melebihi lebar kolom */
+    text-overflow: ellipsis;
+  }
+
+  .author-text {
+    white-space: nowrap; /* Agar teks tidak melipat jika lebih panjang dari lebar kolom */
+    overflow: hidden; /* Menghilangkan teks yang melebihi lebar kolom */
+    text-overflow: ellipsis;
+  }
+
+  .custom-card-book-detail {
+    border-radius: 20px;
+  }
+
+  .content {
+    --background: url('/assets/images/3.png') no-repeat center center fixed;
+  }
+  

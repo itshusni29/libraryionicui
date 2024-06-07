@@ -1,0 +1,68 @@
+<ion-header [translucent]="true" class="content">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs"></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      Detail Book
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="content">
+  
+  <!-- Currently Reading Section -->
+  <ion-card class="custom-card-book-detail">
+    <ion-card-content>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="12" class="ion-text-center">
+            <!-- Gambar buku -->
+            <ion-img [src]="'assets/images/1.jpg'" style="max-width: 200px; margin: 0 auto;"></ion-img>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="12" class="ion-text-center">
+            <!-- Informasi buku -->
+            <ion-card-title class="text" style="font-size: large;">Free Fall</ion-card-title>
+            <p class="text" style="margin: 0;">William Golding</p>
+            <p class="text" style="margin: 0;"><ion-icon style="color: yellow;" name="star"></ion-icon> 4.5</p>
+            <p class="text" style="margin: 0;">Stock: Available</p>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+  
+  <ion-card class="custom-card-book-detail">
+    <ion-card-content>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="12" class="ion-text-center">
+            <!-- Informasi buku -->
+            <p class="text" style="text-align: left;"><strong>Overview:</strong></p>
+            <p class="text" style="text-align: left;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mattis aliquam faucibus purus in massa tempor nec.</p>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+  <hr>
+  <!-- New Arrival Section -->
+  <div class="new-arrival" style="margin-bottom: 2em;">
+    <div class="arrival-header">
+      <h2 class="new-arrival-title text" style="color: black;">Customer Reviews</h2>
+    </div>
+    <div class="scrolling-wrapper" style="display: flex; overflow-x: auto;">
+      <ion-card class="card" *ngFor="let review of reviews" style="width: 25em; flex: 0 0 auto;">
+        <ion-card-content>
+          <ion-card-title class="text" style="font-size: medium; white-space: normal; word-wrap: break-word;">{{ review.desc }}</ion-card-title>
+          <hr>
+          <p class="text author-text">{{ review.author }}</p>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </div>
+  
+  <app-explore-container></app-explore-container>
+</ion-content>

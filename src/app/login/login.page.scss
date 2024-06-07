@@ -1,0 +1,47 @@
+.login-section {
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+  height: 80vh;
+}
+
+.login-card {
+    margin-top: 15em;
+    padding: 1em;
+    border-radius: 20px;
+    text-align: center;
+    vertical-align: middle;
+    -webkit-box-shadow: -1px 3px 18px 0px rgba(0,0,0,0.75);
+-moz-box-shadow: -1px 3px 18px 0px rgba(0,0,0,0.75);
+box-shadow: -1px 3px 18px 0px rgba(0,0,0,0.75);
+  }
+
+  .login-content {
+    --background: url('/assets/images/1.png') no-repeat center center fixed;
+  }
+  
+  
+  /* global.scss atau styles.scss */
+
+.custom-card-content {
+  padding: 1em;
+}
+
+.custom-item {
+  border-radius: 20px;
+  background-color: transparent;
+  padding: 1em;
+}
+
+.input-custom {
+  --border-radius: 20px;
+}
+
+.custom-button {
+  border-radius: 50px;
+  --border-radius: 20px;
+  width: 90%;
+  padding: 2em;
+}
+
+

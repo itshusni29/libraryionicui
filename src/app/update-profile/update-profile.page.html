@@ -1,0 +1,63 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs"></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      Update Profile
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Edit Profile</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div class="profile-section">
+    <ion-card class="profile-card">
+      <ion-card-content>
+        <!-- Nama -->
+        <ion-item style="padding: 1em;">
+          <ion-label position="stacked">Nama</ion-label>
+          <ion-input placeholder="Nama" style="border-radius: 20px; padding: 1em;" [(ngModel)]="userData.name"></ion-input>
+        </ion-item>
+
+        <!-- Email -->
+        <ion-item style="padding: 1em;">
+          <ion-label position="stacked">Email</ion-label>
+          <ion-input type="email" placeholder="Email" style="border-radius: 20px; padding: 1em;" [(ngModel)]="userData.email"></ion-input>
+        </ion-item>
+
+        <!-- Nomor HP -->
+        <ion-item style="padding: 1em;">
+          <ion-label position="stacked">Nomor HP</ion-label>
+          <ion-input type="tel" placeholder="Nomor HP" style="border-radius: 20px; padding: 1em;" [(ngModel)]="userData.nomor_telpon"></ion-input>
+        </ion-item>
+
+        <!-- Alamat -->
+        <ion-item style="padding: 1em;">
+          <ion-label position="stacked">Alamat</ion-label>
+          <ion-textarea placeholder="Alamat" style="border-radius: 20px; padding: 1em;" [(ngModel)]="userData.alamat"></ion-textarea>
+        </ion-item>
+
+        <!-- Jenis Kelamin -->
+        <ion-item style="padding: 1em;">
+          <ion-label position="stacked">Jenis Kelamin</ion-label>
+          <ion-textarea placeholder="jenis_kelamin" style="border-radius: 20px; padding: 1em;" [(ngModel)]="userData.jenis_kelamin"></ion-textarea>
+        </ion-item>
+
+        <!-- Password -->
+        <ion-item style="padding: 1em;">
+          <ion-label position="stacked">Password</ion-label>
+          <ion-input type="password" placeholder="Password" style="border-radius: 20px; padding: 1em;" [(ngModel)]="userData.password"></ion-input>
+        </ion-item>
+
+        <!-- Tombol Update -->
+        <ion-button expand="full" fill="clear" (click)="updateProfile()" class="button-update">Update data</ion-button>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

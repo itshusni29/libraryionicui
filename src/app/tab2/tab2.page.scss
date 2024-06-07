@@ -1,0 +1,80 @@
+.text {
+    font-family: "Poppins", sans-serif !important;
+  }
+
+  .scrolling-wrapper {
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+    font-family: "Poppins", sans-serif;
+    .card {
+      display: inline-block;
+      border-radius: 20px;
+      font-family: "Poppins", sans-serif;
+    }
+  }
+
+  .scrolling-wrapper {
+    -webkit-overflow-scrolling: touch;
+    font-family: "Poppins", sans-serif;
+  }
+
+  .scrolling-wrapper {
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+  .new-arrival-title {
+    padding-left: 0.5em;
+  }
+
+  .vertical-center {
+    align-items: center;
+  }
+  
+  .text-center {
+    text-align: center;
+  }
+
+  .top-read-title {
+    padding-left: 0.5em;
+  }
+
+  .new-arrival-title {
+    padding-left: 0.5em;
+  }
+
+  .arrival-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: -10px; /* Atur jarak antara judul dan konten */
+  }
+
+  .top-read-card {
+    --box-shadow: none;
+  }
+
+  .search {
+    --box-shadow: none;
+    border-radius: 50%;
+  }
+
+  .text-book-title {
+    white-space: nowrap; /* Agar teks tidak melipat jika lebih panjang dari lebar kolom */
+    overflow: hidden; /* Menghilangkan teks yang melebihi lebar kolom */
+    text-overflow: ellipsis;
+    color: black;
+  }
+
+  .text-author {
+    color: grey;
+  }
+  
+  .content {
+    --background: url('/assets/images/3.png') no-repeat center center fixed;
+  }
+
+  ion-searchbar.search {
+    --border-radius: 20px;
+  }

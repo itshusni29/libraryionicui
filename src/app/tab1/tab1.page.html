@@ -1,0 +1,56 @@
+<!-- src/app/tab1/tab1.page.html -->
+<ion-content [fullscreen]="true" class="content">
+  <div class="greeting">
+    <p class="text" style="color: white;"><b>Hi, {{ userName }}</b></p>
+    <h2 class="text" style="color: white;">
+      <b>
+        What book are you picking up today?
+      </b>
+    </h2>
+  </div>
+
+  <!-- Currently Reading Section -->
+  <ion-card class="book-card" href="/detail-books">
+    <ion-card-header>
+      <ion-card-subtitle class="text">Currently reading</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="3">
+            <!-- Gambar buku -->
+            <ion-img [src]="'assets/images/1.jpg'"></ion-img>
+          </ion-col>
+          <ion-col size="9">
+            <!-- Informasi buku -->
+            <ion-card-title class="text">Free Fall</ion-card-title>
+            <p class="text">William Golding</p>
+            <p class="text">Return until 25.03.2020</p>
+            <!-- Isi lainnya -->
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- New Arrival Section -->
+  <div class="new-arrival">
+    <div class="arrival-header">
+      <h2 class="new-arrival-title text" style="color: black;">New Arrival</h2>
+      <div class="view-all-container">
+        <ion-button size="small" fill="clear" class="text" href="/all">View All ></ion-button>
+      </div>
+    </div>
+    <div class="scrolling-wrapper">
+      <ion-card class="card" *ngFor="let book of newBooks" style="width: 10em;" href="/detail-books">
+        <ion-img [src]="book.cover" style="width: 100%; height: auto;"></ion-img>
+        <ion-card-content>
+          <ion-card-title class="text text-book-title" style="font-size: medium;">{{ book.judul }}</ion-card-title>
+          <p class="text author-text">{{ book.pengarang }}</p>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </div>
+
+  <app-explore-container></app-explore-container>
+</ion-content>

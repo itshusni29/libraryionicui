@@ -1,0 +1,159 @@
+
+<ion-content [fullscreen]="true" class="content">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large" class="text">Library</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <!-- Form Pencarian -->
+  <ion-searchbar class="search" placeholder="Search Library"></ion-searchbar>
+
+  <div class="top-read">
+    <div class="read-top">
+      <h2 class="top-read-title text" style="color: black;">Top Read</h2>
+    </div>
+    <div class="scrolling-wrapper">
+      <ion-card class="card top-read-card" style="width: 15em; box-shadow: none; background-color: transparent;">
+        <ion-card-content style="padding: 0px; background-color: transparent;">
+          <ion-grid>
+              <ion-row class="vertical-center">
+                <ion-col size="3">
+                  <!-- Gambar buku -->
+                  <ion-img [src]="'assets/images/1.jpg'"></ion-img>
+                </ion-col>
+                <ion-col size="2" class="text-center">
+                  <!-- Nomor buku -->
+                  <h2 class="text text-book-title"><b>1.</b></h2>
+                </ion-col>
+                <ion-col size="7">
+                  <!-- Informasi buku -->
+                  <h2 class="text text-book-title"><b>Free Fall</b></h2>
+                  <p class="text text-book-title text-author">William Golding</p>
+                  <!-- Isi lainnya -->
+                </ion-col>
+              </ion-row> 
+          </ion-grid>
+
+          <ion-grid>
+            <ion-row class="vertical-center">
+              <ion-col size="3">
+                <!-- Gambar buku -->
+                <ion-img [src]="'assets/images/2.jpg'"></ion-img>
+              </ion-col>
+              <ion-col size="2" class="text-center">
+                <!-- Nomor buku -->
+                <h2 class="text text-book-title"><b>2.</b></h2>
+              </ion-col>
+              <ion-col size="7">
+                <!-- Informasi buku -->
+                <h2 class="text text-book-title"><b>Pria Tangguh</b></h2>
+                <p class="text text-book-title text-author">William Golding</p>
+                <!-- Isi lainnya -->
+              </ion-col>
+            </ion-row>          
+          </ion-grid>
+
+          <ion-grid>
+            <ion-row class="vertical-center">
+              <ion-col size="3">
+                <!-- Gambar buku -->
+                <ion-img [src]="'assets/images/3.jpg'"></ion-img>
+              </ion-col>
+              <ion-col size="2" class="text-center">
+                <!-- Nomor buku -->
+                <h2 class="text text-book-title"><b>3.</b></h2>
+              </ion-col>
+              <ion-col size="7">
+                <!-- Informasi buku -->
+                <h2 class="text text-book-title"><b>Kala Senja Menyapa</b></h2>
+                <p class="text text-book-title text-author">William Golding</p>
+                <!-- Isi lainnya -->
+              </ion-col>
+            </ion-row>          
+          </ion-grid>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card class="card top-read-card" style="width: 15em; box-shadow: none; background-color: transparent;">
+        <ion-card-content style="padding: 0px; background-color: transparent;">
+          <ion-grid>
+            <ion-row class="vertical-center">
+              <ion-col size="3">
+                <!-- Gambar buku -->
+                <ion-img [src]="'assets/images/4.jpg'"></ion-img>
+              </ion-col>
+              <ion-col size="2" class="text-center">
+                <!-- Nomor buku -->
+                <h2 class="text text-book-title"><b>4.</b></h2>
+              </ion-col>
+              <ion-col size="7">
+                <!-- Informasi buku -->
+                <h2 class="text text-book-title"><b>Kisah Cinta Remaja</b></h2>
+                <p class="text text-book-title text-author">William Golding</p>
+                <!-- Isi lainnya -->
+              </ion-col>
+            </ion-row>          
+          </ion-grid>
+
+          <ion-grid>
+            <ion-row class="vertical-center">
+              <ion-col size="3">
+                <!-- Gambar buku -->
+                <ion-img [src]="'assets/images/5.jpg'"></ion-img>
+              </ion-col>
+              <ion-col size="2" class="text-center">
+                <!-- Nomor buku -->
+                <h2 class="text text-book-title"><b>5.</b></h2>
+              </ion-col>
+              <ion-col size="7">
+                <!-- Informasi buku -->
+                <h2 class="text text-book-title"><b>Cinta Sampai Ke Surya</b></h2>
+                <p class="text text-book-title text-author">William Golding</p>
+                <!-- Isi lainnya -->
+              </ion-col>
+            </ion-row>          
+          </ion-grid>
+
+          <ion-grid>
+            <ion-row class="vertical-center">
+              <ion-col size="3">
+                <!-- Gambar buku -->
+                <ion-img [src]="'assets/images/6.jpg'"></ion-img>
+              </ion-col>
+              <ion-col size="2" class="text-center">
+                <!-- Nomor buku -->
+                <h2 class="text text-book-title"><b>6.</b></h2>
+              </ion-col>
+              <ion-col size="7">
+                <!-- Informasi buku -->
+                <h2 class="text text-book-title"><b>Tentang Cinta</b></h2>
+                <p class="text text-book-title text-author">William Golding</p>
+                <!-- Isi lainnya -->
+              </ion-col>
+            </ion-row>          
+          </ion-grid>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </div>
+  <!-- Top Read -->
+
+  <div class="new-arrival">
+    <div class="arrival-header">
+      <h2 class="new-arrival-title text" style="color: black;">Recommended For You</h2>
+      <div class="view-all-container">
+        <ion-button size="small" fill="clear" class="text" href="/all">View All</ion-button>
+      </div>
+    </div>
+    <div class="scrolling-wrapper">
+      <ion-card class="card" *ngFor="let book of newBooks" style="width: 10em;" href="/detail-books">
+        <ion-img [src]="book.imageUrl" style="width: 100%; height: auto;"></ion-img>
+        <ion-card-content>
+          <ion-card-title class="text text-book-title" style="font-size: medium;">{{ book.title }}</ion-card-title>
+          <p class="text author-text">{{ book.author }}</p>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </div>
+</ion-content>

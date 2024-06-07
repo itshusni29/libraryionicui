@@ -1,0 +1,61 @@
+.login-section {
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+  height: 80vh;
+}
+
+.profile-card {
+    padding: 1em;
+    border-radius: 20px;
+    text-align: center;
+    vertical-align: middle;
+    -webkit-box-shadow: -1px 3px 18px 0px rgba(0,0,0,0.75);
+-moz-box-shadow: -1px 3px 18px 0px rgba(0,0,0,0.75);
+box-shadow: -1px 3px 18px 0px rgba(0,0,0,0.75);
+  }
+
+  .content {
+    --background: url('/assets/images/1.png') no-repeat center center fixed;
+  }
+  
+  
+  /* global.scss atau styles.scss */
+
+.custom-card-content {
+  padding: 1em;
+}
+
+.custom-item {
+  border-radius: 20px;
+  background-color: transparent;
+  padding: 1em;
+}
+
+.input-custom {
+  --border-radius: 20px;
+}
+
+.custom-button {
+  --border-radius: 20px;
+  --box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  --background: #3880ff;
+  margin-top: 1em;
+}
+
+.profile-picture {
+  width: 150px; /* Sesuaikan ukuran foto profil */
+  height: 150px;
+  border-radius: 50%; /* Membuat foto profil berbentuk bulat */
+  margin-bottom: 10px;
+}
+
+.button-update {
+  width: 100%;
+  background-color: #ff9800;
+  border-radius: 50px;
+  color: white;
+}
+
+
+

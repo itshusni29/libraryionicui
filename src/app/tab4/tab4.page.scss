@@ -1,0 +1,41 @@
+.profile-info {
+    margin: 90px auto; /* Pusatkan elemen */
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center; /* Pusatkan teks */
+  }
+  
+  .profile-picture {
+    width: 150px; /* Sesuaikan ukuran foto profil */
+    height: 150px;
+    border-radius: 50%; /* Membuat foto profil berbentuk bulat */
+    margin-bottom: 10px;
+  }
+  
+  .profile-name {
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+  
+  ion-button {
+    margin-top: 10px;
+  }
+
+  .button-logout {
+    width: 100%;
+    background-color: #C73659;
+    border-radius: 50px;
+    color: white;
+  }
+
+  .button-update-profile {
+    width: 100%;
+    background-color: #ff9800;
+    border-radius: 50px;
+    color: white;
+  }
+
+  .content {
+    --background: url('/assets/images/4.png') no-repeat center center fixed;
+  }
+  

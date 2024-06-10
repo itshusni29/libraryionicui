@@ -1,4 +1,3 @@
-// src/app/tab1/tab1.page.ts
 import { Component, OnInit } from '@angular/core';
 import { BookService } from '../services/book.service';
 import { AuthService } from '../services/auth.service';
@@ -11,6 +10,7 @@ import { AuthService } from '../services/auth.service';
 export class Tab1Page implements OnInit {
   newBooks: any[] = [];
   userName: string = ''; // Variable to store the user's name
+  baseUrl: string = 'http://127.0.0.1:8000/storage/'; // Base URL for images
 
   constructor(private bookService: BookService, private authService: AuthService) {}
 
@@ -21,7 +21,11 @@ export class Tab1Page implements OnInit {
 
   fetchNewBooks() {
     this.bookService.getNewBooks().subscribe(response => {
-      this.newBooks = response.slice(0, 6); // Limit to 6 books
+      this.newBooks = response.map(book => {
+        // Add base URL to cover URL
+        book.cover = this.baseUrl + book.cover;
+        return book;
+      }).slice(0, 6); // Limit to 6 books
     });
   }
 

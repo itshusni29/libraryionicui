@@ -11,6 +11,13 @@ export class BookService {
 
   constructor(private http: HttpClient) {}
 
+  getAllBooks(): Observable<any[]> {
+    return this.http.get<any[]>(this.apiUrl);
+  }
+
+  getBookById(id: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/${id}`);
+  }
   getNewBooks(): Observable<any[]> {
     return this.http.get<any[]>(this.apiUrl);
   }

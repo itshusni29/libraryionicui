@@ -11,45 +11,47 @@
 
 <ion-content [fullscreen]="true" class="content">
   
-  <!-- Currently Reading Section -->
+  <!-- Detail Book Section -->
   <ion-card class="custom-card-book-detail">
     <ion-card-content>
       <ion-grid>
         <ion-row>
           <ion-col size="12" class="ion-text-center">
-            <!-- Gambar buku -->
-            <ion-img [src]="'assets/images/1.jpg'" style="max-width: 200px; margin: 0 auto;"></ion-img>
+            <!-- Book Cover -->
+            <ion-img [src]="book?.cover" style="max-width: 200px; margin: 0 auto;"></ion-img>
           </ion-col>
         </ion-row>
         <ion-row>
           <ion-col size="12" class="ion-text-center">
-            <!-- Informasi buku -->
-            <ion-card-title class="text" style="font-size: large;">Free Fall</ion-card-title>
-            <p class="text" style="margin: 0;">William Golding</p>
-            <p class="text" style="margin: 0;"><ion-icon style="color: yellow;" name="star"></ion-icon> 4.5</p>
-            <p class="text" style="margin: 0;">Stock: Available</p>
+            <!-- Book Information -->
+            <ion-card-title class="text" style="font-size: large;">{{ book?.judul }}</ion-card-title>
+            <p class="text" style="margin: 0;">{{ book?.pengarang }}</p>
+            <p class="text" style="margin: 0;">Ratings: <ion-icon style="color: yellow;" name="star"></ion-icon> {{ book?.ratings }}</p>
+            <p class="text" style="margin: 0;">Stock: {{ book?.stock_available }}</p>
+            <ion-button shape="round" (click)="borrowBook()">Borrow</ion-button>
           </ion-col>
         </ion-row>
       </ion-grid>
     </ion-card-content>
   </ion-card>
   
+  <!-- Book Description Section -->
   <ion-card class="custom-card-book-detail">
     <ion-card-content>
       <ion-grid>
         <ion-row>
           <ion-col size="12" class="ion-text-center">
-            <!-- Informasi buku -->
             <p class="text" style="text-align: left;"><strong>Overview:</strong></p>
-            <p class="text" style="text-align: left;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mattis aliquam faucibus purus in massa tempor nec.</p>
+            <p class="text" style="text-align: left;">{{ book?.deskripsi }}</p>
           </ion-col>
         </ion-row>
       </ion-grid>
     </ion-card-content>
   </ion-card>
   <hr>
-  <!-- New Arrival Section -->
+  <!-- Customer Reviews Section -->
   <div class="new-arrival" style="margin-bottom: 2em;">
+    <!----
     <div class="arrival-header">
       <h2 class="new-arrival-title text" style="color: black;">Customer Reviews</h2>
     </div>
@@ -61,8 +63,9 @@
           <p class="text author-text">{{ review.author }}</p>
         </ion-card-content>
       </ion-card>
-    </div>
+    </div>-->
   </div>
   
-  <app-explore-container></app-explore-container>
+  <!-- Placeholder for additional content or components -->
+  <!-- <app-explore-container></app-explore-container> -->
 </ion-content>

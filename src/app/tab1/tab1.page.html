@@ -42,7 +42,7 @@
       </div>
     </div>
     <div class="scrolling-wrapper">
-      <ion-card class="card" *ngFor="let book of newBooks" style="width: 10em;" href="/detail-books">
+      <ion-card class="card" *ngFor="let book of newBooks" [routerLink]="['/detail-books', book.id]" style="width: 10em;">
         <ion-img [src]="book.cover" style="width: 100%; height: auto;"></ion-img>
         <ion-card-content>
           <ion-card-title class="text text-book-title" style="font-size: medium;">{{ book.judul }}</ion-card-title>

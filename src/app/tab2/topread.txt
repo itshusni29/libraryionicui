@@ -1,58 +1,4 @@
-<!-- src/app/tab1/tab1.page.html -->
-<ion-content [fullscreen]="true" class="content">
-  <div class="greeting">
-    <p class="text" style="color: white;"><b>Hi, {{ userName }}</b></p>
-    <h2 class="text" style="color: white;">
-      <b>
-        What book are you picking up today?
-      </b>
-    </h2>
-  </div>
-
-  <!-- Currently Reading Section -->
-  <ion-card class="book-card" href="/detail-books">
-    <ion-card-header>
-      <ion-card-subtitle class="text">Currently reading</ion-card-subtitle>
-    </ion-card-header>
-    <ion-card-content>
-      <ion-grid>
-        <ion-row>
-          <ion-col size="3">
-            <!-- Gambar buku -->
-            <ion-img [src]="'assets/images/1.jpg'"></ion-img>
-          </ion-col>
-          <ion-col size="9">
-            <!-- Informasi buku -->
-            <ion-card-title class="text">Free Fall</ion-card-title>
-            <p class="text">William Golding</p>
-            <p class="text">Return until 25.03.2020</p>
-            <!-- Isi lainnya -->
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </ion-card-content>
-  </ion-card>
-
-  <!-- New Arrival Section -->
-  <div class="new-arrival">
-    <div class="arrival-header">
-      <h2 class="new-arrival-title text" style="color: black;">New Arrival</h2>
-      <div class="view-all-container">
-        <ion-button size="small" fill="clear" class="text" href="/all">View All ></ion-button>
-      </div>
-    </div>
-    <div class="scrolling-wrapper">
-      <ion-card class="card" *ngFor="let book of newBooks" [routerLink]="['/detail-books', book.id]" style="width: 10em;">
-        <ion-img [src]="book.cover" style="width: 100%; height: auto;"></ion-img>
-        <ion-card-content>
-          <ion-card-title class="text text-book-title" style="font-size: medium;">{{ book.judul }}</ion-card-title>
-          <p class="text author-text">{{ book.pengarang }}</p>
-        </ion-card-content>
-      </ion-card>
-    </div>
-  </div>
-
-  <div class="top-read">
+<div class="top-read">
     <div class="read-top">
       <h2 class="top-read-title text" style="color: black;">Top Read</h2>
     </div>
@@ -179,8 +125,69 @@
         </ion-card-content>
       </ion-card>
     </div>
-  </div>
-  <!-- Top Read -->
+  <!-- </div>
+  Top Read -->
 
-  <app-explore-container></app-explore-container>
+  <ion-content [fullscreen]="true" class="content">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large" class="text">Library</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <!-- Form Pencarian -->
+  <ion-searchbar class="search" [(ngModel)]="searchTerm" placeholder="Search" (ionInput)="filterBooks()"></ion-searchbar>
+
+  <!-- <ion-item>
+    <ion-label>Food:</ion-label>
+    <ion-select [(ngModel)]="selectedFood" [compareWith]="compareWith" (ionChange)="handleChange($event)">
+      <ion-select-option *ngFor="let food of foods" [value]="food">{{ food.name }}</ion-select-option>
+    </ion-select>
+  </ion-item> -->
+
+  <!-- Category Select Dropdown with similar UI to Searchbar -->
+  <div class="custom-select-container">
+    <h5 class="select-heading">Select by category</h5>
+    <ion-select class="custom-select" [(ngModel)]="selectedCategory" (ionChange)="filterBooks()" interface="popover" placeholder="Select Category">
+      <ion-select-option value="All">All</ion-select-option>
+      <ion-select-option value="Fiksi">Fiksi</ion-select-option>
+      <ion-select-option value="Non-fiksi">Non-fiksi</ion-select-option>
+      <ion-select-option value="Novel">Novel</ion-select-option>
+      <ion-select-option value="Cerpen">Cerpen</ion-select-option>
+      <ion-select-option value="Drama">Drama</ion-select-option>
+      <ion-select-option value="Puisi">Puisi</ion-select-option>
+      <ion-select-option value="Biografi">Biografi</ion-select-option>
+      <ion-select-option value="Sejarah">Sejarah</ion-select-option>
+      <ion-select-option value="Ilmiah">Ilmiah</ion-select-option>
+      <ion-select-option value="Teknologi">Teknologi</ion-select-option>
+      <ion-select-option value="Bisnis">Bisnis</ion-select-option>
+      <ion-select-option value="Kesehatan">Kesehatan</ion-select-option>
+      <ion-select-option value="Seni">Seni</ion-select-option>
+      <ion-select-option value="Musik">Musik</ion-select-option>
+      <ion-select-option value="Pendidikan">Pendidikan</ion-select-option>
+      <ion-select-option value="Agama">Agama</ion-select-option>
+      <ion-select-option value="Filosofi">Filosofi</ion-select-option>
+      <ion-select-option value="Politik">Politik</ion-select-option>
+      <ion-select-option value="Psikologi">Psikologi</ion-select-option>
+      <ion-select-option value="Hukum">Hukum</ion-select-option>
+      <ion-select-option value="Perjalanan">Perjalanan</ion-select-option>
+      <ion-select-option value="Kuliner">Kuliner</ion-select-option>
+      <ion-select-option value="Olahraga">Olahraga</ion-select-option>
+      <ion-select-option value="Alam">Alam</ion-select-option>
+      <ion-select-option value="Petualangan">Petualangan</ion-select-option>
+    </ion-select>
+  </div>
+
+  <!-- Daftar Buku -->
+  <div class="scrolling-wrapper">
+    <ion-card class="card" *ngFor="let book of filteredBooks.slice(0, 3)" [routerLink]="['/detail-books', book.id]">
+      <ion-img [src]="book.imageUrl" style="width: 100%; height: auto;"></ion-img>
+      <ion-card-content>
+        <ion-card-title class="text text-book-title">{{ book.title }}</ion-card-title>
+        <p class="text author-text">{{ book.author }}</p>
+      </ion-card-content>
+    </ion-card>
+  </div>
+  
+
 </ion-content>

@@ -12,6 +12,10 @@ const routes: Routes = [
     loadChildren: () => import('./login/login.module').then(m => m.LoginPageModule)
   },
   {
+    path: 'register', // Route for the Register page
+    loadChildren: () => import('./register/register.module').then(m => m.RegisterPageModule)
+  },
+  {
     path: 'tabs',
     loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
   },
@@ -20,17 +24,16 @@ const routes: Routes = [
     loadChildren: () => import('./books/books.module').then(m => m.BooksPageModule)
   },
   {
-    path: 'detail-books/:id', // Menambahkan parameter 'id' di sini
+    path: 'detail-books/:id',
     loadChildren: () => import('./book-detail/book-detail.module').then(m => m.BookDetailPagePageModule)
   },
   {
     path: 'update-profile',
     loadChildren: () => import('./update-profile/update-profile.module').then(m => m.UpdateProfilePageModule)
   },
-  // Jika Anda memiliki rute default, pastikan itu berada di bagian akhir
   {
     path: '**',
-    redirectTo: 'login', // Misalnya, redirect ke halaman login jika rute tidak cocok
+    redirectTo: 'login',
     pathMatch: 'full'
   },
 ];

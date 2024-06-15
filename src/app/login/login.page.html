@@ -9,7 +9,8 @@
         <ion-item>
           <ion-input [(ngModel)]="password" placeholder="Password" type="password" style="--border-radius: 50px; --background: white; --color: black; --border: 2px solid #007dff; width: 100%; margin-bottom: 1em;"></ion-input>
         </ion-item>
-        <ion-button expand="block" (click)="login()" style="--border-radius: 50px; --background: #007dff; --color: white;">Masuk</ion-button>
+        <ion-button expand="block" (click)="login()" style="--border-radius: 50px; --background: #007dff; --color: white; margin-bottom: 1em;">Masuk</ion-button>
+        <ion-button expand="block" routerLink="/register" style="--border-radius: 50px; --background: #28a745; --color: white;">Register</ion-button>
       </ion-card-content>
     </ion-card>
   </div>

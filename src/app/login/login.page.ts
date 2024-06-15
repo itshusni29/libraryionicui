@@ -27,4 +27,19 @@ export class LoginPage {
       console.log('Login failed', error);
     });
   }
+
+  register() {
+    const registerData = {
+      email: this.email,
+      password: this.password
+    };
+
+    this.authService.register(registerData).subscribe(response => {
+      console.log('Registration successful', response);
+      localStorage.setItem('token', response.token); 
+      this.router.navigate(['/tabs']); 
+    }, error => {
+      console.log('Registration failed', error);
+    });
+  }
 }

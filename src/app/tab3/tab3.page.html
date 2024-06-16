@@ -1,5 +1,3 @@
-
-
 <ion-content [fullscreen]="true" class="content">
   <ion-header collapse="condense">
     <ion-toolbar>
@@ -8,15 +6,30 @@
   </ion-header>
 
   <ion-content>
-    <ion-list  style="margin-bottom: 5em;">
-      <ion-item *ngFor="let item of items; let index" href="/detail-books">
-        <img class="image-book" style="width: 20%; padding: 0.5em;" [src]="item.imageUrl" alt="avatar" />
+    <ion-list style="margin-bottom: 5em;" *ngIf="items.length > 0; else noItems">
+      <ion-item *ngFor="let item of items">
+        <img class="image-book" style="width: 20%; padding: 0.5em;" [src]="item?.cover" alt="avatar" />
         <ion-label>
-          {{ item.title }} <br>
-          {{item.author}}
+          {{ item.judul }} <br>
+          {{ item.pengarang }}
         </ion-label>
-        <p><ion-icon style="color: yellow;" name="star"></ion-icon> {{item.rating}}</p>
+        <p>
+          <ion-icon style="color: yellow;" name="star"></ion-icon> {{ item.rating }}
+        </p>
+        <ion-button *ngIf="item.inWishlist; else notInWishlist" (click)="removeFromWishlist(item.id)">
+          Remove from Wishlist
+        </ion-button>
+        <ng-template #notInWishlist>
+          <ion-button (click)="addToWishlist(item.id)">
+            Add to Wishlist
+          </ion-button>
+        </ng-template>
       </ion-item>
     </ion-list>
+    <ng-template #noItems>
+      <ion-text class="ion-text-center">
+        No items in your wishlist.
+      </ion-text>
+    </ng-template>
   </ion-content>
 </ion-content>

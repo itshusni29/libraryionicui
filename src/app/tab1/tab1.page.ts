@@ -1,7 +1,8 @@
+// tab1.page.ts
 import { Component, OnInit } from '@angular/core';
 import { BookService } from '../services/book.service';
 import { AuthService } from '../services/auth.service';
-import { Router } from '@angular/router'; // Import Router
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tab1',
@@ -10,37 +11,60 @@ import { Router } from '@angular/router'; // Import Router
 })
 export class Tab1Page implements OnInit {
   newBooks: any[] = [];
-  userName: string = ''; // Variable to store the user's name
-  baseUrl: string = 'http://127.0.0.1:8000/storage/'; // Base URL for images
+  topReadBooks: any[] = []; // New array to hold top read books
+  userName: string = '';
 
   constructor(
     private bookService: BookService,
     private authService: AuthService,
-    private router: Router // Inject Router
+    private router: Router
   ) {}
 
   ngOnInit() {
     this.fetchNewBooks();
+    this.fetchTopReadBooks(); // Call the function to fetch top read books
     this.getUserData();
   }
 
   fetchNewBooks() {
-    this.bookService.getNewBooks().subscribe(response => {
-      this.newBooks = response.map(book => {
-        // Add base URL to cover URL
-        book.cover = this.baseUrl + book.cover;
-        return book;
-      }).slice(0, 6); // Limit to 6 books
-    });
+    this.bookService.getNewBooks().subscribe(
+      (response: any[]) => {
+        this.newBooks = response.map(book => {
+          book.cover = book.cover; // Make sure the image URL is correctly set
+          return book;
+        }).slice(0, 6); // Limit to 6 books
+      },
+      error => {
+        console.error('Error fetching new books:', error);
+      }
+    );
+  }
+
+  fetchTopReadBooks() {
+    this.bookService.getTopReadBooks().subscribe(
+      (response: any[]) => {
+        this.topReadBooks = response.map(book => {
+          book.cover = book.cover; // Make sure the image URL is correctly set
+          return book;
+        }).slice(0, 3); // Limit to 3 top read books
+      },
+      error => {
+        console.error('Error fetching top read books:', error);
+      }
+    );
   }
 
   getUserData() {
-    this.authService.getLoggedInUser().subscribe(response => {
-      this.userName = response.name; // Adjust this based on the actual structure of your response
-    });
+    this.authService.getLoggedInUser().subscribe(
+      (response: any) => {
+        this.userName = response.name; // Adjust according to your actual response structure
+      },
+      error => {
+        console.error('Error fetching user data:', error);
+      }
+    );
   }
 
-  // Function to navigate to book detail page
   goToBookDetail(bookId: string) {
     this.router.navigate(['/detail-books', bookId]);
   }

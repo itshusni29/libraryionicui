@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { BookLoanService } from '../services/book-loan.service';
+import { WishlistService } from '../services/Wishlist.service';
+
 
 @Component({
   selector: 'app-tab3',
@@ -7,20 +10,28 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['tab3.page.scss'],
 })
 export class Tab3Page implements OnInit {
-  items: any[] = [];
+  wishlistItems: any[] = [];
+  borrowedBooks: any[] = [];
+  showWishlist = false; // Variabel untuk mengontrol tampilan Wishlist
+  showBorrowedBooks = false; // Variabel untuk mengontrol tampilan My Books
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private wishlistService: WishlistService,
+    private bookLoanService: BookLoanService
+  ) {}
 
   ngOnInit() {
-    this.loadBooks();
+    this.loadWishlist();
+    this.loadBorrowedBooks();
   }
 
-  loadBooks() {
-    this.http.get<any[]>('http://127.0.0.1:8000/api/wishlists').subscribe(
+  loadWishlist() {
+    this.wishlistService.getAllWishlistItems().subscribe(
       (response) => {
-        this.items = response.map((item) => ({
+        this.wishlistItems = response.map((item) => ({
           ...item.book,
-          inWishlist: true, // Flag to indicate it's in the wishlist
+          inWishlist: true,
         }));
       },
       (error) => {
@@ -29,12 +40,49 @@ export class Tab3Page implements OnInit {
     );
   }
 
+  loadBorrowedBooks() {
+    this.bookLoanService.getAllBorrowItems().subscribe(
+      (response) => {
+        this.borrowedBooks = response.map((item) => item.book);
+      },
+      (error) => {
+        console.error('Error fetching borrowed books:', error);
+      }
+    );
+  }
+
+  toggleViewWishlist() {
+    this.showWishlist = true;
+    this.showBorrowedBooks = false;
+  }
+
+  toggleViewBorrowedBooks() {
+    this.showBorrowedBooks = true;
+    this.showWishlist = false;
+  }
+
+  removeFromWishlist(bookId: number) {
+    this.wishlistService.removeFromWishlist(bookId).subscribe(
+      (response) => {
+        console.log('Book removed from wishlist successfully:', response);
+        // Update items to reflect the new wishlist status
+        const item = this.wishlistItems.find((item) => item.id === bookId);
+        if (item) {
+          item.inWishlist = false;
+        }
+      },
+      (error) => {
+        console.error('Error removing book from wishlist:', error);
+      }
+    );
+  }
+
   addToWishlist(bookId: number) {
-    this.http.post('http://127.0.0.1:8000/api/wishlists', { book_id: bookId }).subscribe(
+    this.wishlistService.addToWishlist(bookId).subscribe(
       (response) => {
         console.log('Book added to wishlist successfully:', response);
         // Update items to reflect the new wishlist status
-        const item = this.items.find((item) => item.id === bookId);
+        const item = this.wishlistItems.find((item) => item.id === bookId);
         if (item) {
           item.inWishlist = true;
         }
@@ -45,19 +93,10 @@ export class Tab3Page implements OnInit {
     );
   }
 
-  removeFromWishlist(bookId: number) {
-    this.http.delete(`http://127.0.0.1:8000/api/wishlists/${bookId}`).subscribe(
-      (response) => {
-        console.log('Book removed from wishlist successfully:', response);
-        // Update items to reflect the new wishlist status
-        const item = this.items.find((item) => item.id === bookId);
-        if (item) {
-          item.inWishlist = false;
-        }
-      },
-      (error) => {
-        console.error('Error removing book from wishlist:', error);
-      }
-    );
+  getBookCoverUrl(item: any): string {
+    if (item && item.cover) {
+      return 'http://127.0.0.1:8000/storage/' + item.cover;
+    }
+    return 'assets/default-cover.jpg';
   }
 }

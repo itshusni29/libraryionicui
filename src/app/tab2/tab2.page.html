@@ -19,7 +19,7 @@
   
   <!-- Daftar Buku -->
   <ion-list lines="full" class="ion-no-padding">
-    <ion-item *ngFor="let book of filteredBooks" [routerLink]="['/book-detail', book.id]">
+    <ion-item *ngFor="let book of filteredBooks" [routerLink]="['/detail-books', book.id]" >
       <ion-thumbnail slot="start">
         <ion-img class="image-book" [src]="book?.cover" alt="book cover"></ion-img>
       </ion-thumbnail>

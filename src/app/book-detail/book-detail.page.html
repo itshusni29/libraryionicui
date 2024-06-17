@@ -1,3 +1,5 @@
+<!-- book-detail.page.html -->
+
 <ion-content [fullscreen]="true" class="content">
   <ion-header [translucent]="true">
     <ion-toolbar>
@@ -5,7 +7,7 @@
         <ion-back-button defaultHref="/tabs"></ion-back-button>
       </ion-buttons>
       <ion-title>
-        Detail Book
+        Book Detail
       </ion-title>
     </ion-toolbar>
   </ion-header>
@@ -24,8 +26,10 @@
             <p class="text" style="margin: 0;">{{ book?.pengarang }}</p>
             <p class="text" style="margin: 0;">Ratings: <ion-icon style="color: yellow;" name="star"></ion-icon> {{ book?.ratings }}</p>
             <p class="text" style="margin: 0;">Stock: {{ book?.stock_available }}</p>
-            <ion-button shape="round" (click)="borrowBook()">Borrow</ion-button>
-            <!-- Toggle tombol Add to Wishlist / Remove from Wishlist berdasarkan inWishlist -->
+            <!-- Tombol Borrow atau Return -->
+            <ion-button shape="round" *ngIf="!isBorrowed" (click)="borrowBook()">Borrow</ion-button>
+            <ion-button shape="round" *ngIf="isBorrowed" (click)="returnBook()">Return</ion-button>
+            <!-- Tombol Add to Wishlist / Remove from Wishlist -->
             <ion-button *ngIf="inWishlist; else notInWishlist" (click)="removeFromWishlist(book.id)">
               Remove from Wishlist
             </ion-button>

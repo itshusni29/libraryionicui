@@ -28,9 +28,9 @@ export class Tab1Page implements OnInit {
     this.bookService.getNewBooks().subscribe(response => {
       this.newBooks = response.map(book => {
         // Add base URL to cover URL
-        book.cover = this.baseUrl + book.cover;
+        book.cover = book.cover;
         return book;
-      }).slice(0, 6); // Limit to 6 books
+      }).slice(0, 6); 
     });
   }
 

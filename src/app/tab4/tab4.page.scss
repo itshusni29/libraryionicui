@@ -1,41 +1,71 @@
+.content {
+  --background: url('/assets/images/4.png') no-repeat center center fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  background-size: cover; /* Ensure background image covers the entire area */
+}
+
 .profile-info {
-    margin: 90px auto; /* Pusatkan elemen */
-    padding: 20px;
-    border-radius: 10px;
-    text-align: center; /* Pusatkan teks */
-  }
-  
-  .profile-picture {
-    width: 150px; /* Sesuaikan ukuran foto profil */
-    height: 150px;
-    border-radius: 50%; /* Membuat foto profil berbentuk bulat */
-    margin-bottom: 10px;
-  }
-  
-  .profile-name {
-    font-size: 20px;
-    margin-bottom: 20px;
-  }
-  
-  ion-button {
-    margin-top: 10px;
-  }
+  margin: 0 auto; /* Center the element horizontally */
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center; /* Center the text */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; /* Center the content vertically */
+  height: 100%; /* Take full height of the parent */
+}
 
-  .button-logout {
-    width: 100%;
-    background-color: #C73659;
-    border-radius: 50px;
-    color: white;
-  }
+.profile-picture-container {
+  width: 150px; /* Adjust size */
+  height: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px; /* Space below the profile picture/initials */
+}
 
-  .button-update-profile {
-    width: 100%;
-    background-color: #ff9800;
-    border-radius: 50px;
-    color: white;
-  }
+.profile-picture {
+  width: 100%; /* Adjust profile picture size */
+  height: 100%;
+  border-radius: 50%; /* Make profile picture circular */
+}
 
-  .content {
-    --background: url('/assets/images/4.png') no-repeat center center fixed;
-  }
-  
+.profile-initials {
+  width: 100%; /* Adjust initials size to match profile picture */
+  height: 100%;
+  border-radius: 50%;
+  background-color: #007dff; /* Default background color */
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 40px;
+  font-weight: bold;
+}
+
+.profile-name {
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+ion-button {
+  margin-top: 10px;
+}
+
+.button-logout {
+  width: 100%;
+  background-color: #C73659;
+  border-radius: 50px;
+  color: white;
+}
+
+.button-update-profile {
+  width: 100%;
+  background-color: #ff9800;
+  border-radius: 50px;
+  color: white;
+}

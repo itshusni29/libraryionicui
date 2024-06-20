@@ -6,21 +6,21 @@
   </ion-header>
 
   <div class="profile-info">
-    <!-- Profile Picture -->
-    <img src="assets/images/profile.jpg" alt="Profile Picture" class="profile-picture">
+    <div class="profile-picture-container">
+      <img *ngIf="safePhotoUrl" [src]="safePhotoUrl" alt="Profile Picture" class="profile-picture">
+      <div *ngIf="!safePhotoUrl" class="profile-initials">{{ getInitials(user.name) }}</div>
+    </div>
 
-    <!-- User Information -->
-    <h2 class="profile-name" style="color: black;">{{ user.name }}</h2>
-    <h4 style="color: black;">{{ user.email }}</h4>
-    <p style="color: black;">{{ user.nomor_telpon }}</p>
+    <h2 class="profile-name">{{ user.name }}</h2>
+    <h4>{{ user.email }}</h4>
+    <p>{{ user.nomor_telpon }}</p>
 
-    <!-- Menu -->
     <ion-grid>
       <ion-row>
-        <ion-col col="3">
+        <ion-col size="6">
           <ion-button expand="full" fill="clear" href="/update-profile" class="button-update-profile">Update</ion-button>
         </ion-col>
-        <ion-col col="3">
+        <ion-col size="6">
           <ion-button expand="full" fill="clear" (click)="logout()" class="button-logout">Logout</ion-button>
         </ion-col>
       </ion-row>

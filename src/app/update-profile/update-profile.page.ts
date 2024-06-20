@@ -56,8 +56,8 @@ export class UpdateProfilePage implements OnInit {
     this.userService.updateUserData(this.userData.id, this.userData).subscribe(
       (response: any) => {
         console.log('Profile updated successfully', response);
-        // Redirect to profile page or any other page after successful update
-        this.router.navigate(['/tabs/tab4']);
+        // Update local user data with the response data
+        this.userData = response.user;
       },
       (error: any) => {
         console.error('Error updating profile', error);

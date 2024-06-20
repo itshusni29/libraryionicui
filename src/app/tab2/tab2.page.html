@@ -19,25 +19,22 @@
   
   <!-- Daftar Buku -->
   <ion-list lines="full" class="ion-no-padding">
-    <ion-item *ngFor="let book of filteredBooks" [routerLink]="['/detail-books', book.id]">
+    <ion-item *ngFor="let book of filteredBooks" [routerLink]="['/detail-books', book.id]" >
       <ion-thumbnail slot="start">
-        <ion-img class="image-book" [src]="book.imageUrl" alt="book cover"></ion-img>
+        <ion-img class="image-book" [src]="book?.cover" alt="book cover"></ion-img>
       </ion-thumbnail>
       <ion-label>
-        <h2>{{ book.title }}</h2>
-        <ion-text color="medium" class="ion-text-uppercase">{{ book.category }}</ion-text>
-        <p class="author">{{ book.author }}</p>
-        <p class="description">{{ book.description }}</p>
+        <h2>{{ book?.judul }}</h2>
+        <ion-text color="medium" class="ion-text-uppercase">{{ book.kategori }}</ion-text>
+        <p class="author">{{ book?.pengarang }}</p>
+        <p class="description">{{ book.deskripsi }}</p>
         <div class="rating">
-          <ion-icon style="color: gold;" name="star"></ion-icon>
-          <ion-icon style="color: gold;" name="star"></ion-icon>
-          <ion-icon style="color: gold;" name="star"></ion-icon>
-          <ion-icon style="color: gold;" name="star"></ion-icon>
-          <ion-icon style="color: gold;" [name]="book.rating >= 5 ? 'star' : 'star-outline'"></ion-icon>
-          <span class="rating-value">{{ book.rating }}</span>
+          <ng-container *ngFor="let star of getStarArray(book.ratings)">
+            <ion-icon [name]="star" style="color: gold;"></ion-icon>
+          </ng-container>
+          <span class="rating-value">{{ book.ratings }}</span>
         </div>
       </ion-label>
     </ion-item>
   </ion-list>
-
 </ion-content>

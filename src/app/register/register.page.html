@@ -1,5 +1,5 @@
 <ion-content [fullscreen]="true" class="login-content" style="--background: #f0f0f5; display: flex; justify-content: center; align-items: center; height: 100%;">
-  <div class="login-section" style="width: 100%; max-width: 400px; padding: 1em;">
+  <div class="login-section" style="width: 100%; max-width: 400px; padding: -2em;">
     <ion-card class="login-card" style="background-color: white; border-radius: 15px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); text-align: center;">
       <h2 style="color: black;">Register</h2>
       <ion-card-content>
@@ -24,7 +24,12 @@
             <ion-select-option value="P">Perempuan</ion-select-option>
           </ion-select>
         </ion-item>
+        <ion-text color="danger" *ngIf="registrationError">
+          {{ registrationError }}
+        </ion-text>
+        <hr>
         <ion-button expand="block" (click)="register()" style="--border-radius: 50px; --background: #28a745; --color: white; margin-bottom: 1em;">Register</ion-button>
+        <ion-button expand="block" routerLink="/login" style="--border-radius: 50px; --background: #007dff; --color: white;">Kembali</ion-button>
       </ion-card-content>
     </ion-card>
   </div>

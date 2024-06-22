@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../services/auth.service';
 import { BookLoanService } from '../services/book-loan.service';
 import { WishlistService } from '../services/Wishlist.service';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-book-detail',
@@ -18,6 +19,7 @@ export class BookDetailPage implements OnInit {
   inWishlist: boolean = false;
   isBorrowed: boolean = false;
   borrowedItemId: number | null = null; // ID pinjaman buku jika sedang dipinjam
+  isReading: boolean = false; // Flag to toggle between views
 
   constructor(
     private route: ActivatedRoute,
@@ -26,7 +28,8 @@ export class BookDetailPage implements OnInit {
     private authService: AuthService,
     private navCtrl: NavController,
     private wishlistService: WishlistService,
-    private bookLoanService: BookLoanService
+    private bookLoanService: BookLoanService,
+    private sanitizer: DomSanitizer // Inject DomSanitizer
   ) {}
 
   ngOnInit() {
@@ -48,11 +51,6 @@ export class BookDetailPage implements OnInit {
 
       // Check if the book is borrowed by the user and not returned
       this.isBorrowed = this.isBookBorrowed(bookId);
-
-      // Fetch book details from server (to ensure latest data)
-      this.bookService.getBookById(bookId).subscribe(response => {
-        this.book = response;
-      });
     });
   }
 
@@ -156,5 +154,31 @@ export class BookDetailPage implements OnInit {
   isBookBorrowed(bookId: number): boolean {
     const borrowedItems = JSON.parse(localStorage.getItem('borrowed_items') || '[]');
     return borrowedItems.some((item: any) => item.book.id === bookId && item.user.id === this.userId && item.status === 'Dipinjam');
+  }
+
+  // Navigasi ke halaman penampil PDF
+  goToPdfViewer(pdfUrl: string) {
+    this.navCtrl.navigateForward(['/pdf-viewer', encodeURIComponent(pdfUrl)]);
+  }
+
+  // Method untuk membuka Google Drive link
+  goToGoogleDrive() {
+    const googleDriveUrl = 'https://docs.google.com/document/d/13S1u8wDX6MrzH3jB1dTNUHIcQzfU542v-5r50lOmcXw/edit?usp=sharing';
+    window.open(googleDriveUrl, '_blank'); // Buka link di tab atau window baru
+  }
+
+  // Method untuk toggle tampilan baca
+  goToReadingView() {
+    this.isReading = true;
+  }
+
+  // Method untuk keluar dari tampilan baca
+  exitReadingView() {
+    this.isReading = false;
+  }
+
+  // Method untuk membersihkan URL
+  sanitizeUrl(url: string): SafeResourceUrl {
+    return this.sanitizer.bypassSecurityTrustResourceUrl(url);
   }
 }

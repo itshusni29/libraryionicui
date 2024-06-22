@@ -3,22 +3,22 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class BookLoanService {
-  private baseUrl = 'http://127.0.0.1:8000/api'; // Base URL for the Laravel API
+  private baseUrl = 'http://localhost:8000/api';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   borrowBook(bookId: number): Observable<any> {
-    return this.http.post(`${this.baseUrl}/borrow/${bookId}`, {});
+    return this.http.post<any>(`${this.baseUrl}/borrow/${bookId}`, {});
   }
 
   returnBook(loanId: number): Observable<any> {
-    return this.http.post(`${this.baseUrl}/return/${loanId}`, {});
+    return this.http.post<any>(`${this.baseUrl}/return/${loanId}`, {});
   }
 
   getAllBorrowItems(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.baseUrl}/borrowed-books`);
+    return this.http.get<any[]>(`${this.baseUrl}/borrowed-books/user`);
   }
 }

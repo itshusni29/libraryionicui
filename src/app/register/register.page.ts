@@ -14,6 +14,7 @@ export class RegisterPage {
   alamat: string = '';
   nomor_telpon: string = '';
   jenis_kelamin: string = '';
+  registrationError: string = ''; // Deklarasi properti registrationError
 
   constructor(private authService: AuthService, private router: Router) {}
 
@@ -34,6 +35,11 @@ export class RegisterPage {
     }, error => {
       console.error('Registration failed', error);
       // Handle registration error, e.g., show error message
+      if (error.status === 400) {
+        this.registrationError = 'Registrasi gagal. Pastikan data yang diinput benar.';
+      } else {
+        this.registrationError = 'Terjadi kesalahan saat melakukan registrasi.';
+      }
     });
   }
 }

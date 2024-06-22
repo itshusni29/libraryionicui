@@ -10,6 +10,8 @@ import { Router } from '@angular/router';
 export class LoginPage {
   email: string = '';
   password: string = '';
+  loginError: string = '';
+  loginSuccess: string = '';
 
   constructor(private authService: AuthService, private router: Router) {}
 
@@ -21,10 +23,15 @@ export class LoginPage {
 
     this.authService.login(loginData).subscribe(response => {
       console.log('Login successful', response);
-      localStorage.setItem('token', response.token); 
-      this.router.navigate(['/tabs']); 
+      this.loginSuccess = 'Login berhasil!';
+      this.loginError = ''; // Bersihkan pesan error jika ada
+      localStorage.setItem('token', response.token);
+      // Navigasi ke halaman atau rute yang sesuai setelah login berhasil
+      this.router.navigate(['/tabs']);
     }, error => {
       console.log('Login failed', error);
+      this.loginError = 'Email atau password salah. Silakan coba lagi.';
+      this.loginSuccess = ''; // Bersihkan pesan sukses jika ada
     });
   }
 
@@ -36,8 +43,8 @@ export class LoginPage {
 
     this.authService.register(registerData).subscribe(response => {
       console.log('Registration successful', response);
-      localStorage.setItem('token', response.token); 
-      this.router.navigate(['/tabs']); 
+      localStorage.setItem('token', response.token);
+      this.router.navigate(['/tabs']);
     }, error => {
       console.log('Registration failed', error);
     });

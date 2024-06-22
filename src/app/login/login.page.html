@@ -1,17 +1,25 @@
-<ion-content [fullscreen]="true" class="login-content" style="--background: #f0f0f5; display: flex; justify-content: center; align-items: center; height: 100%;">
-  <div class="login-section" style="width: 100%; max-width: 400px; padding: 1em;">
-    <ion-card class="login-card" style="background-color: white; border-radius: 15px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); text-align: center;">
-      <h2 style="color: black;">Login</h2>
-      <ion-card-content>
-        <ion-item>
-          <ion-input [(ngModel)]="email" placeholder="Email" type="email" style="--border-radius: 50px; --background: white; --color: black; --border: 2px solid #007dff; width: 100%; margin-bottom: 1em;"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-input [(ngModel)]="password" placeholder="Password" type="password" style="--border-radius: 50px; --background: white; --color: black; --border: 2px solid #007dff; width: 100%; margin-bottom: 1em;"></ion-input>
-        </ion-item>
-        <ion-button expand="block" (click)="login()" style="--border-radius: 50px; --background: #007dff; --color: white; margin-bottom: 1em;">Masuk</ion-button>
-        <ion-button expand="block" routerLink="/register" style="--border-radius: 50px; --background: #28a745; --color: white;">Register</ion-button>
-      </ion-card-content>
-    </ion-card>
+<ion-content fullscreen="true" class="login-content" style="--background: #f0f0f5; display: flex; justify-content: center; align-items: center; height: 100%; padding-top: 1em;">
+  <div style="display: flex; flex-direction: column; align-items: center;">
+    <div class="login-section" style="width: 100%; max-width: 900px; padding: -3em;">
+      <ion-card class="login-card" style="background-color: white; border-radius: 25px; box-shadow: 0 6px 6px rgba(0, 0, 0, 0.1); text-align: center;">
+        <img src="assets/images/logo.png" alt="Logo" style="height: 140px; margin-bottom: -1em;">
+        <h2 style="color: black; margin-top: 1em;"></h2>
+        <ion-card-content>
+          <ion-item>
+            <ion-input [(ngModel)]="email" placeholder="Email" type="email" style="--border-radius: 50px; --background: white; --color: black; --border: 2px solid #007dff; width: 100%; margin-bottom: 1em;"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input [(ngModel)]="password" placeholder="Password" type="password" style="--border-radius: 50px; --background: white; --color: black; --border: 2px solid #007dff; width: 100%; margin-bottom: 1em;"></ion-input>
+          </ion-item>
+          <hr>
+          <div *ngIf="loginError" style="color: red; margin-bottom: 1em;">{{ loginError }}</div>
+          <div *ngIf="loginSuccess" style="color: green; margin-bottom: 1em;">{{ loginSuccess }}</div>
+          <ion-button expand="block" (click)="login()" style="--border-radius: 50px; --background: #007dff; --color: white; margin-bottom: 1em;">Login</ion-button>
+          <p>Or</p>
+          <hr>
+          <ion-button expand="block" routerLink="/register" style="--border-radius: 50px; --background: #28a745; --color: white;">Register</ion-button>
+        </ion-card-content>
+      </ion-card>
+    </div>
   </div>
 </ion-content>

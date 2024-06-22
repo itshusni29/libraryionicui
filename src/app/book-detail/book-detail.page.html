@@ -1,5 +1,3 @@
-<!-- book-detail.page.html -->
-
 <ion-content [fullscreen]="true" class="content">
   <ion-header [translucent]="true">
     <ion-toolbar>
@@ -7,53 +5,66 @@
         <ion-back-button defaultHref="/tabs"></ion-back-button>
       </ion-buttons>
       <ion-title>
-        Book Detail
+        {{ isReading ? 'Reading Book' : 'Book Detail' }}
       </ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <ion-card class="custom-card-book-detail">
-    <ion-card-content>
-      <ion-grid>
-        <ion-row>
-          <ion-col size="12" class="ion-text-center">
-            <ion-img [src]="book?.cover" style="max-width: 200px; margin: 0 auto;"></ion-img>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col size="12" class="ion-text-center">
-            <ion-card-title class="text" style="font-size: large;">{{ book?.judul }}</ion-card-title>
-            <p class="text" style="margin: 0;">{{ book?.pengarang }}</p>
-            <p class="text" style="margin: 0;">Ratings: <ion-icon style="color: yellow;" name="star"></ion-icon> {{ book?.ratings }}</p>
-            <p class="text" style="margin: 0;">Stock: {{ book?.stock_available }}</p>
-            <!-- Tombol Borrow atau Return -->
-            <ion-button shape="round" *ngIf="!isBorrowed" (click)="borrowBook()">Borrow</ion-button>
-            <ion-button shape="round" *ngIf="isBorrowed" (click)="returnBook()">Return</ion-button>
-            <!-- Tombol Add to Wishlist / Remove from Wishlist -->
-            <ion-button *ngIf="inWishlist; else notInWishlist" (click)="removeFromWishlist(book.id)">
-              Remove from Wishlist
-            </ion-button>
-            <ng-template #notInWishlist>
-              <ion-button (click)="addToWishlist(book.id)">
-                Add to Wishlist
+  <div *ngIf="!isReading; else readingView">
+    <!-- Existing book detail view -->
+    <ion-card class="custom-card-book-detail">
+      <ion-card-content>
+        <ion-grid>
+          <ion-row>
+            <ion-col size="12" class="ion-text-center">
+              <ion-img [src]="book?.cover" style="max-width: 200px; margin: 0 auto;"></ion-img>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="12" class="ion-text-center">
+              <ion-card-title class="text" style="font-size: large;">{{ book?.judul }}</ion-card-title>
+              <p class="text" style="margin: 0;">{{ book?.pengarang }}</p>
+              <p class="text" style="margin: 0;">Ratings: <ion-icon style="color: yellow;" name="star"></ion-icon> {{ book?.ratings }}</p>
+              <p class="text" style="margin: 0;">Stock: {{ book?.stock_available }}</p>
+              <ion-button shape="round" *ngIf="!isBorrowed" (click)="borrowOrReturnBook()">Borrow</ion-button>
+              <ion-button shape="round" *ngIf="isBorrowed" (click)="borrowOrReturnBook()">Return</ion-button>
+              <ion-button *ngIf="inWishlist; else notInWishlist" (click)="removeFromWishlist(book.id)" shape="round">
+                Remove from Wishlist
               </ion-button>
-            </ng-template>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </ion-card-content>
-  </ion-card>
+              
+              <ng-template #notInWishlist>
+                <!-- Button untuk menambah ke Wishlist -->
+                <ion-button (click)="addToWishlist(book.id)" shape="round">
+                  Add to Wishlist
+                </ion-button>
+              </ng-template>
+              <ng-template #notInWishlist>
+                <ion-button (click)="addToWishlist(book.id)">
+                  Add to Wishlist
+                </ion-button>
+              </ng-template>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-content>
+    </ion-card>
 
-  <ion-card class="custom-card-book-detail">
-    <ion-card-content>
-      <ion-grid>
-        <ion-row>
-          <ion-col size="12" class="ion-text-center">
-            <p class="text" style="text-align: left;"><strong>Overview:</strong></p>
-            <p class="text" style="text-align: left;">{{ book?.deskripsi }}</p>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </ion-card-content>
-  </ion-card>
-</ion-content>
+    <ion-card class="custom-card-book-detail">
+      <ion-card-content>
+        <ion-grid>
+          <ion-row>
+            <ion-col size="12" class="ion-text-center">
+              <p class="text" style="text-align: left;"><strong>Overview:</strong></p>
+              <p class="text" style="text-align: left;">{{ book?.deskripsi }}</p>
+              <ion-button shape="round" (click)="goToGoogleDrive()">Read</ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <!-- Placeholder for reading view -->
+  <ng-template #readingView>
+    <div>
+      <p>Reading content...</p>

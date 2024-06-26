@@ -11,7 +11,6 @@
   </ion-header>
 
   <div *ngIf="!isReading; else readingView">
-    <!-- Existing book detail view -->
     <ion-card class="custom-card-book-detail">
       <ion-card-content>
         <ion-grid>
@@ -28,18 +27,14 @@
               <p class="text" style="margin: 0;">Stock: {{ book?.stock_available }}</p>
               <ion-button shape="round" *ngIf="!isBorrowed" (click)="borrowOrReturnBook()">Borrow</ion-button>
               <ion-button shape="round" *ngIf="isBorrowed" (click)="borrowOrReturnBook()">Return</ion-button>
-              <ion-button *ngIf="inWishlist; else notInWishlist" (click)="removeFromWishlist(book.id)" shape="round">
-                Remove from Wishlist
-              </ion-button>
               
-              <ng-template #notInWishlist>
-                <!-- Button untuk menambah ke Wishlist -->
-                <ion-button (click)="addToWishlist(book.id)" shape="round">
-                  Add to Wishlist
+              <ng-container *ngIf="inWishlist; else notInWishlist">
+                <ion-button (click)="removeFromWishlist(book.id)" shape="round">
+                  Remove from Wishlist
                 </ion-button>
-              </ng-template>
+              </ng-container>
               <ng-template #notInWishlist>
-                <ion-button (click)="addToWishlist(book.id)">
+                <ion-button (click)="addToWishlist(book.id)" shape="round">
                   Add to Wishlist
                 </ion-button>
               </ng-template>
@@ -56,7 +51,7 @@
             <ion-col size="12" class="ion-text-center">
               <p class="text" style="text-align: left;"><strong>Overview:</strong></p>
               <p class="text" style="text-align: left;">{{ book?.deskripsi }}</p>
-              <ion-button shape="round" (click)="goToGoogleDrive()">Read</ion-button>
+              <ion-button shape="round" *ngIf="userId !== null" (click)="goToPdfViewer(book.id)">Read</ion-button>
             </ion-col>
           </ion-row>
         </ion-grid>
@@ -68,3 +63,6 @@
   <ng-template #readingView>
     <div>
       <p>Reading content...</p>
+    </div>
+  </ng-template>
+</ion-content>

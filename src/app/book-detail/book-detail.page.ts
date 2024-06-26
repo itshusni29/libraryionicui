@@ -2,11 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { BookService } from '../services/book.service';
-import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../services/auth.service';
 import { BookLoanService } from '../services/book-loan.service';
-import { WishlistService } from '../services/Wishlist.service';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { WishlistService } from '../services/Wishlist.service';
 
 @Component({
   selector: 'app-book-detail',
@@ -18,24 +17,28 @@ export class BookDetailPage implements OnInit {
   userId: number | null = null;
   inWishlist: boolean = false;
   isBorrowed: boolean = false;
-  borrowedItemId: number | null = null; // ID pinjaman buku jika sedang dipinjam
-  isReading: boolean = false; // Flag to toggle between views
+  borrowedItemId: number | null = null;
+  isReading: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
     private bookService: BookService,
-    private http: HttpClient,
     private authService: AuthService,
     private navCtrl: NavController,
     private wishlistService: WishlistService,
     private bookLoanService: BookLoanService,
-    private sanitizer: DomSanitizer // Inject DomSanitizer
+    private sanitizer: DomSanitizer
   ) {}
 
   ngOnInit() {
     this.authService.getLoggedInUser().subscribe(
       (user: any) => {
-        this.userId = user.id;
+        if (user) {
+          this.userId = user.id;
+        } else {
+          // Jika pengguna tidak login, arahkan ke halaman login
+          this.navCtrl.navigateRoot(['/login']);
+        }
       },
       error => {
         console.error('Error fetching logged in user:', error);
@@ -46,10 +49,8 @@ export class BookDetailPage implements OnInit {
       const bookId = params['id'];
       this.fetchBookDetails(bookId);
 
-      // Check if the book is in the wishlist (from localStorage)
       this.inWishlist = this.isBookInLocalStorage(bookId);
 
-      // Check if the book is borrowed by the user and not returned
       this.isBorrowed = this.isBookBorrowed(bookId);
     });
   }
@@ -65,7 +66,7 @@ export class BookDetailPage implements OnInit {
       response => {
         console.log('Book added to wishlist:', response);
         this.inWishlist = true;
-        this.updateLocalStorage(bookId, true); // Update localStorage
+        this.updateLocalStorage(bookId, true);
       },
       error => {
         console.error('Error adding book to wishlist:', error);
@@ -78,7 +79,7 @@ export class BookDetailPage implements OnInit {
       response => {
         console.log('Book removed from wishlist:', response);
         this.inWishlist = false;
-        this.updateLocalStorage(bookId, false); // Update localStorage
+        this.updateLocalStorage(bookId, false);
       },
       error => {
         console.error('Error removing book from wishlist:', error);
@@ -93,10 +94,8 @@ export class BookDetailPage implements OnInit {
     }
 
     if (this.isBorrowed) {
-      // Already borrowed, return the book
       this.returnBook();
     } else {
-      // Not borrowed, borrow the book
       this.borrowBook();
     }
   }
@@ -106,7 +105,7 @@ export class BookDetailPage implements OnInit {
       (response: any) => {
         console.log('Response:', response);
         this.isBorrowed = true;
-        this.borrowedItemId = response.id; // Simpan ID pinjaman buku yang baru
+        this.borrowedItemId = response.id;
         alert('Book borrowed successfully');
       },
       error => {
@@ -136,7 +135,6 @@ export class BookDetailPage implements OnInit {
     );
   }
 
-  // Helper functions to manage localStorage
   updateLocalStorage(bookId: number, isInWishlist: boolean) {
     const storageKey = `wishlist_book_${bookId}`;
     if (isInWishlist) {
@@ -156,28 +154,22 @@ export class BookDetailPage implements OnInit {
     return borrowedItems.some((item: any) => item.book.id === bookId && item.user.id === this.userId && item.status === 'Dipinjam');
   }
 
-  // Navigasi ke halaman penampil PDF
-  goToPdfViewer(pdfUrl: string) {
-    this.navCtrl.navigateForward(['/pdf-viewer', encodeURIComponent(pdfUrl)]);
+  goToPdfViewer(bookId: string) {
+    if (!this.userId) {
+      console.error('User ID is null');
+      return;
+    }
+    this.navCtrl.navigateForward(['/pdf-viewer', bookId]);
   }
 
-  // Method untuk membuka Google Drive link
-  goToGoogleDrive() {
-    const googleDriveUrl = 'https://docs.google.com/document/d/13S1u8wDX6MrzH3jB1dTNUHIcQzfU542v-5r50lOmcXw/edit?usp=sharing';
-    window.open(googleDriveUrl, '_blank'); // Buka link di tab atau window baru
-  }
-
-  // Method untuk toggle tampilan baca
   goToReadingView() {
     this.isReading = true;
   }
 
-  // Method untuk keluar dari tampilan baca
   exitReadingView() {
     this.isReading = false;
   }
 
-  // Method untuk membersihkan URL
   sanitizeUrl(url: string): SafeResourceUrl {
     return this.sanitizer.bypassSecurityTrustResourceUrl(url);
   }

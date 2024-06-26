@@ -38,4 +38,13 @@ export class BookService {
     const url = `${this.booksUrl}?top_read=true`;
     return this.http.get<any[]>(url);
   }
+
+  getPdfUrl(bookId: string): string {
+    return `${this.booksUrl}/${bookId}/pdf`;
+  }
+
+  getBookPdf(bookId: string): Observable<Blob> {
+    const pdfUrl = this.getPdfUrl(bookId);
+    return this.http.get(pdfUrl, { responseType: 'blob' });
+  }
 }

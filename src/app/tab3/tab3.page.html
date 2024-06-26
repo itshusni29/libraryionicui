@@ -25,7 +25,7 @@
 
   <!-- Wishlist Display -->
   <ion-list class="item-list" *ngIf="showWishlist && wishlistItems.length > 0; else noWishlistItems">
-    <ion-item *ngFor="let item of wishlistItems" lines="full" class="custom-card" [routerLink]="['/detail-books', item.id]" routerDirection="forward">
+    <ion-item *ngFor="let item of wishlistItems" lines="full" class="custom-card" (click)="viewBookDetail(item.id)">
       <ion-thumbnail slot="start" class="book-thumbnail">
         <img [src]="getBookCoverUrl(item)" alt="book cover" class="image-book" />
       </ion-thumbnail>
@@ -50,7 +50,7 @@
 
   <!-- My Books Display -->
   <ion-list class="item-list" *ngIf="showBorrowedBooks && borrowedBooks.length > 0; else noBorrowedBooks">
-    <ion-item *ngFor="let book of borrowedBooks" lines="full" class="custom-card" [routerLink]="['/detail-books', book.id]" routerDirection="forward">
+    <ion-item *ngFor="let book of borrowedBooks" lines="full" class="custom-card" (click)="viewBookDetail(book.id)">
       <ion-thumbnail slot="start" class="book-thumbnail">
         <img [src]="getBookCoverUrl(book)" alt="book cover" class="image-book" />
       </ion-thumbnail>

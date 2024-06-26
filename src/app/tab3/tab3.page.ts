@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 import { BookLoanService } from '../services/book-loan.service';
 import { WishlistService } from '../services/Wishlist.service';
 
@@ -17,6 +18,7 @@ export class Tab3Page implements OnInit {
 
   constructor(
     private http: HttpClient,
+    private router: Router,
     private wishlistService: WishlistService,
     private bookLoanService: BookLoanService
   ) {}
@@ -114,5 +116,10 @@ export class Tab3Page implements OnInit {
       return 'http://127.0.0.1:8000/storage/' + item.cover;
     }
     return 'assets/default-cover.jpg';
+  }
+
+  viewBookDetail(bookId: string) {
+    // Navigasi ke halaman detail buku
+    this.router.navigate(['/detail-books', bookId]);
   }
 }

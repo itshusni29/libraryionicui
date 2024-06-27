@@ -32,14 +32,14 @@ const routes: Routes = [
     loadChildren: () => import('./update-profile/update-profile.module').then(m => m.UpdateProfilePageModule)
   },
   {
+    path: 'pdf-viewer/:id', // Add the bookId parameter
+    loadChildren: () => import('./pdf-viewer/pdf-viewer.module').then(m => m.PdfViewerPageModule)
+  },
+  {
     path: '**',
     redirectTo: 'login',
     pathMatch: 'full'
-  },  {
-    path: 'pdf-viewer',
-    loadChildren: () => import('./pdf-viewer/pdf-viewer.module').then( m => m.PdfViewerPageModule)
   },
-
 ];
 
 @NgModule({

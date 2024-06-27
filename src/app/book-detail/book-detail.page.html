@@ -21,10 +21,12 @@
           </ion-row>
           <ion-row>
             <ion-col size="12" class="ion-text-center">
-              <ion-card-title class="text" style="font-size: large;">{{ book?.judul }}</ion-card-title>
-              <p class="text" style="margin: 0;">{{ book?.pengarang }}</p>
-              <p class="text" style="margin: 0;">Ratings: <ion-icon style="color: yellow;" name="star"></ion-icon> {{ book?.ratings }}</p>
-              <p class="text" style="margin: 0;">Stock: {{ book?.stock_available }}</p>
+              <ion-card-title>{{ book?.judul }}</ion-card-title>
+              <p>{{ book?.pengarang }}</p>
+              <p *ngIf="book?.ratings !== null && book?.ratings !== undefined">
+                Ratings: <ion-icon style="color: yellow;" name="star"></ion-icon> {{ book?.ratings }}
+              </p>
+              <p>Stock: {{ book?.stock_available }}</p>
               <ion-button shape="round" *ngIf="!isBorrowed" (click)="borrowOrReturnBook()">Borrow</ion-button>
               <ion-button shape="round" *ngIf="isBorrowed" (click)="borrowOrReturnBook()">Return</ion-button>
               
@@ -49,8 +51,8 @@
         <ion-grid>
           <ion-row>
             <ion-col size="12" class="ion-text-center">
-              <p class="text" style="text-align: left;"><strong>Overview:</strong></p>
-              <p class="text" style="text-align: left;">{{ book?.deskripsi }}</p>
+              <p><strong>Overview:</strong></p>
+              <p>{{ book?.deskripsi }}</p>
               <ion-button shape="round" *ngIf="userId !== null" (click)="goToPdfViewer(book.id)">Read</ion-button>
             </ion-col>
           </ion-row>

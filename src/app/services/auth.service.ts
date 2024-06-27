@@ -21,8 +21,21 @@ export class AuthService {
   logout(): Observable<any> {
     return this.http.post(`${this.apiUrl}/logout`, {});
   }
-
   getLoggedInUser(): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/user`);
   }
+
+  // Optionally, you can add methods to manage the token or session in local storage
+  setToken(token: string) {
+    localStorage.setItem('auth_token', token);
+  }
+
+  getToken(): string | null {
+    return localStorage.getItem('auth_token');
+  }
+
+  clearToken() {
+    localStorage.removeItem('auth_token');
+  }
 }
+

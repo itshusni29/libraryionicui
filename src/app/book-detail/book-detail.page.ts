@@ -36,7 +36,7 @@ export class BookDetailPage implements OnInit {
         if (user) {
           this.userId = user.id;
         } else {
-          // Jika pengguna tidak login, arahkan ke halaman login
+          // If the user is not logged in, navigate to the login page
           this.navCtrl.navigateRoot(['/login']);
         }
       },
@@ -48,9 +48,7 @@ export class BookDetailPage implements OnInit {
     this.route.params.subscribe(params => {
       const bookId = params['id'];
       this.fetchBookDetails(bookId);
-
       this.inWishlist = this.isBookInLocalStorage(bookId);
-
       this.isBorrowed = this.isBookBorrowed(bookId);
     });
   }
@@ -159,7 +157,7 @@ export class BookDetailPage implements OnInit {
       console.error('User ID is null');
       return;
     }
-    this.navCtrl.navigateForward(['/pdf-viewer', bookId]);
+    this.navCtrl.navigateForward(['/pdf-viewer', bookId]); // Pass the bookId as a parameter
   }
 
   goToReadingView() {

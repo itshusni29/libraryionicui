@@ -6,8 +6,8 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class BookService {
-  private baseUrl = 'http://127.0.0.1:8000/api'; // Base URL for API
-  private booksUrl = `${this.baseUrl}/books`; // URL for books endpoint
+  private baseUrl = 'http://127.0.0.1:8000/api';
+  private booksUrl = `${this.baseUrl}/books`;
 
   constructor(private http: HttpClient) {}
 
@@ -39,12 +39,8 @@ export class BookService {
     return this.http.get<any[]>(url);
   }
 
-  getPdfUrl(bookId: string): string {
-    return `${this.booksUrl}/${bookId}/pdf`;
-  }
-
-  getBookPdf(bookId: string): Observable<Blob> {
-    const pdfUrl = this.getPdfUrl(bookId);
-    return this.http.get(pdfUrl, { responseType: 'blob' });
+  getBookPdfUrl(bookId: string): Observable<string> {
+    const url = `${this.baseUrl}/books/${bookId}/pdf`;
+    return this.http.get(url, { responseType: 'text' });
   }
 }

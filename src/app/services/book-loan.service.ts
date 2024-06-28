@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class BookLoanService {
-  private baseUrl = 'http://localhost:8000/api';
+  private baseUrl = 'https://kutbuk.if22g.com/api';
 
   constructor(private http: HttpClient) { }
 

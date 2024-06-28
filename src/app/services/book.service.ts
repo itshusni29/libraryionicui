@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class BookService {
-  private baseUrl = 'http://127.0.0.1:8000/api';
+  private baseUrl = 'https://kutbuk.if22g.com/api';
   private booksUrl = `${this.baseUrl}/books`;
 
   constructor(private http: HttpClient) {}

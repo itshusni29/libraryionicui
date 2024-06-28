@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root',
 })
 export class WishlistService {
-  private baseUrl = 'http://127.0.0.1:8000/api/wishlists';
+  private baseUrl = 'https://kutbuk.if22g.com/api/wishlists';
 
   constructor(private http: HttpClient) {}
 

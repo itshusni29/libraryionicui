@@ -113,7 +113,7 @@ export class Tab3Page implements OnInit {
 
   getBookCoverUrl(item: any): string {
     if (item && item.cover) {
-      return 'http://127.0.0.1:8000/storage/' + item.cover;
+      return 'https://kutbuk.if22g.com/storage/' + item.cover;
     }
     return 'assets/default-cover.jpg';
   }
